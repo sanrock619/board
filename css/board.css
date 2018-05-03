@@ -1,0 +1,148 @@
+.tdclass {
+  background-color: #84C1FF;
+  color: white;
+  text-align: right;
+  width: 100px;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.txtBoard {
+  color: black;
+  background-color: #D2E9FF;
+  border-width: 1px;
+  border-bottom-style: solid;
+  border-color: black;
+}
+
+.txtclass {
+  color: black;
+  background-color: #D2E9FF;
+  border-width: 1px;
+  border-bottom-style: solid;
+  border-color: black;
+}
+
+.boardReply {
+  color: 	#004B97;
+  box-sizing: border-box;
+  table-layout: fixed;
+  background-color: #D2E9FF;
+  border-width: 1px;
+  border-bottom-style: solid;
+  border-color: black;
+  font-weight: bold;
+}
+
+.tdIndex {
+  background-color: #84C1FF;
+  color: white;
+  text-align: right;
+  width: 125px;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.txtIndex {
+  background-color: #D2E9FF;
+}
+
+
+.txtarIndex {
+  height: 160px;
+  background-color: #D2E9FF;
+}
+
+.textArea {
+  resize: none;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+.msgReply {
+  resize: none;
+  width: 100%;
+  height: 100;
+  box-sizing: border-box;
+  display: inline-block;
+  table-layout: fixed;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #8E8E8E;
+  margin-right: 20px
+}
+
+.maClass {
+  background-color: #84C1FF;
+  color: white;
+  text-align: right;
+  width: 100px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.code {
+  background: url(code_bg.jpg);
+  color: blue;
+  font-size: 30px;
+  border: 0;
+  font-weight: bolder;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  width: 80px;
+  float: left;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#submit {
+  visibility:hidden;
+}
+
+/*#submit {*/
+/*  visibility: hidden;*/
+/*}*/
+
+#inputcode {
+  width: 110;
+}
+
+#panel {
+  text-align: center;
+  font-size: 115%;
+  display: none;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+#flip {
+  text-align: center;
+  font-size: 115%;
+}
+
+#maPanel {
+  text-align: center;
+  font-size: 115%;
+  color: black;
+  display: block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#maFlip {
+  text-align: center;
+  font-size: 115%;
+}

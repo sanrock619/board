@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>管理後台帳號驗證</title>
+
+<!-- core css -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- template css -->
+<link href="css/cover.css" rel="stylesheet">
+<!-- project css -->
+<link href="css/board.css" rel="stylesheet">
+<!-- signin css -->
+<link href="css/signin.css" rel="stylesheet">
+
+</head>
+
+<body background="img/starfield-background.png">
+	<div style="background-image: url('img/starfield-background.png'); background-repeat: repeat">
+		<div class="site-wrapper">
+			<div class="site-wrapper-inner">
+				<div class="cover-container">
+					<div class="masthead clearfix">
+						<div class="inner">
+							<nav>
+								<ul class="nav masthead-nav">
+									<li><a href="index.php" target="_blank">
+									<span class="glyphicon glyphicon-home"></span>首頁</a></li>
+									<li><a href="mailto:sanrock619@gmail.com">
+									<span class="glyphicon glyphicon-envelope"></span>連絡管理員</a></li>
+									<li class="active"><a href="signin.html">
+									<span class="glyphicon glyphicon-wrench"></span>管理後台</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<div class="inner cover">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<font size='3'><strong>帳號驗證</strong></font>
+							</div>
+							<div class="panel-body" style="background-color: #D2E9FF">
+								<form class="form-signin" method="post" action="signin.php">
+									<h4 class="form-signin-heading">請輸入管理員帳號及密碼</h4>
+									<label for="inputAccount" class="sr-only">Email address</label>
+									<input type="text" id="inputAccount" name="account"
+										   class="form-control" placeholder="Account" required autofocus>
+									<label for="inputPassword" class="sr-only">Password</label>
+									<input type="password" id="inputPassword" name="password"
+										   class="form-control" placeholder="Password" required>
+									<div class="checkbox"></div>
+									<button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+								</form>
+							</div>
+							<div class="panel-footer" style="background: #005AB5"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- core js -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+</html>
