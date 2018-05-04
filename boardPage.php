@@ -44,11 +44,14 @@ $numRows = mysqli_num_rows($result);
 							<nav>
 								<ul class="nav masthead-nav">
 									<li><a href="index.php" target="_blank"> <span
-											class="glyphicon glyphicon-home">首頁</a></li>
+											class="glyphicon glyphicon-home"></span>首頁
+									</a></li>
 									<li class="active"><a href="boardPage.php"> <span
-											class="glyphicon glyphicon-wrench">管理後台</a></li>
+											class="glyphicon glyphicon-wrench"></span>管理後台
+									</a></li>
 									<li id="refresh"><a href="#"> <span
-											class="glyphicon glyphicon-refresh">刷新頁面</a></li>
+											class="glyphicon glyphicon-refresh"></span>刷新頁面
+									</a></li>
 								</ul>
 							</nav>
 						</div>
@@ -82,13 +85,13 @@ $numRows = mysqli_num_rows($result);
 														<td class="maClass" style="vertical-align: middle">修改設定：</td>
 														<td><input type="radio" name="msgPrivate" value="public"
 															id="public"> <label for="public"><font color="blue"><span
-																	class="glyphicon glyphicon-ok-circle">留言公開</font></label>&nbsp;
+																	class="glyphicon glyphicon-ok-circle"></span>留言公開</font></label>&nbsp;
 															&nbsp; <input type="radio" name="msgPrivate"
 															value="private" id="private"> <label for="private"><font
-																color="red"><span class="glyphicon glyphicon-ban-circle">留言不公開</font></label>&nbsp;
+																color="red"><span class="glyphicon glyphicon-ban-circle"></span>留言不公開</font></label>&nbsp;
 															&nbsp; <input type="radio" name="msgPrivate" value="hide"
 															id="hide"> <label for="hide"><font color="#666666"><span
-																	class="glyphicon glyphicon-remove">刪除留言</font></label>
+																	class="glyphicon glyphicon-remove"></span>刪除留言</font></label>
 														</td>
 													</tr>
 													<tr>
@@ -189,8 +192,8 @@ if ($numRows > 0) {
 								</font>
 							</div>
 							<div class="panel-footer" style="background: #005AB5">
-								<a href="#top"><span class="glyphicon glyphicon-share-alt"><font
-										size='3'>回到最上頁</a></font>
+								<a href="#top"><span class="glyphicon glyphicon-share-alt"></span><font
+									size='3'>回到最上頁</font></a>
 							</div>
 						</div>
 					</div>
