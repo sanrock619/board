@@ -208,8 +208,8 @@ if ($numRows > 0) {
 	</div>
 </body>
 <!-- core js -->
-<script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <!-- 驗證碼產生器js -->
 <script src="js/code.js"></script>
 <!-- 滑動式視窗js -->

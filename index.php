@@ -6,10 +6,10 @@ require("mysql.inc.php");
 $myTable='msgBoard';
 
 /*執行SQL查詢 語法:$result = mysqli_query($link, $sql);
-  $link=MSQL連線設定變數名稱;$sql="SQL陳述式"
-  查詢資料表所有欄位,將所得到的之查詢結果存入result資料表變數
-  依資料表裡的留言編號遞減排序, 讓最新留言顯示在最前面*/
-$result=mysqli_query($conn,"SELECT * FROM $myTable ORDER BY 留言編號 DESC");
+ $link=MSQL連線設定變數名稱;$sql="SQL陳述式"
+ 查詢資料表所有欄位,將所得到的之查詢結果存入result資料表變數
+ 依資料表裡的留言編號遞減排序, 讓最新留言顯示在最前面*/
+$result=mysqli_query($conn,"SELECT * FROM $myTable ORDER BY msg_id DESC");
 
 //取得留言總筆數並存入變數numRows
 $numRows = mysqli_num_rows($result);
@@ -22,13 +22,10 @@ $numRows = mysqli_num_rows($result);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>留言板</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- 專案套版css -->
   <link href="css/cover.css" rel="stylesheet">
-  <link href="css/Lab.css" rel="stylesheet">
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/snowstorm-min.js"></script>
-  <script src="js/code.js"></script>
-  <script src="js/toggle.js"></script>
+  <!-- 專案客製css -->
+  <link href="css/board.css" rel="stylesheet">
 
 </head>
 
@@ -60,7 +57,7 @@ $numRows = mysqli_num_rows($result);
                   <div id="panel">
                     <p>
                       <font color='red'><span class="glyphicon glyphicon-exclamation-sign"></font>
-                      <font color='black'>若留言內容出現謾罵攻擊等字眼，經發現將和諧化，以維持皇城內的和氣＊</font>
+                      <font color='black'>若留言內容出現謾罵攻擊等字眼，經發現將予以刪除</font>
                     </p>
                     <div style='border:5px #000 double;border-color:#2894FF;margin-bottom:0px'>
                       <form method="post" action="dataPage.php" name="addmessage">
@@ -81,7 +78,7 @@ $numRows = mysqli_num_rows($result);
                               <span class="glyphicon glyphicon-lock"></span><b>留言設定：</b></td>
                             <td class="txtIndex">
                               <input type="radio" name="msgPrivate" value="public" id="public" required>
-                              <label for="public"><font color="blue"><span class="glyphicon glyphicon-ok-circle">留言公開</font></label>&nbsp; &nbsp;
+                              <label for="public"><font color="blue"><span class="glyphicon glyphicon-ok-circle">留言公開</font></label>
                               <input type="radio" name="msgPrivate" value="private" id="private">
                               <label for="private"><font color="red"><span class="glyphicon glyphicon-ban-circle">留言不公開</font></label>
                             </td>
@@ -111,8 +108,9 @@ $numRows = mysqli_num_rows($result);
                     </div>
                   </div><br>
                   <font size='3' color='black'>
+<!-- 留言板php碼開始 -->
 <?php echo "<font color='black'><p align=left>共有 $numRows 筆留言</p></font>"?>
-                    <form>
+                  <form>
 <?php
 
 //如果留言筆數大於 0, 則顯示留言的內容
@@ -123,21 +121,23 @@ if ($numRows>0) {
   
   /*以下使用mysqli_fetch_array()函數,語法:mysqli_fetch_array(result,resulttype)
     參數result:即mysqli_query()方法所查詢之結果(必要)
-        須為mysqli_query() 或 mysqli_store_result() 或 mysqli_use_result()傳回之結果
     參數resulttype:指定產生類型的陣列(非必要) MYSQLI_ASSOC ; MYSQLI_NUM ; MYSQLI_BOTH 三選一*/
   while ($row = mysqli_fetch_array($result)) {
     
-    //將名稱及標題中的特殊字元轉成 HTML 碼
-    $name=htmlspecialchars($row['名稱'], ENT_QUOTES);
-    $msgTitle=htmlspecialchars($row['標題'], ENT_QUOTES);
+    //將名稱及標題中的特殊字元轉成 HTML碼,ENT_QUOTES：雙引號與單引號都轉換
+    $name=htmlspecialchars($row['name'], ENT_QUOTES);
+    $msgTitle=htmlspecialchars($row['title'], ENT_QUOTES);
     
     //將留言、回覆及留言設定中的特殊字元、換行字元、與空白轉成 HTML 碼
-    $message=htmlspecialchars($row['留言'], ENT_QUOTES);
+    //str_replace(find,replace,string)
+    //nl2br():在字串中的每個\n之前插入<br>,nl2br(string,xhtml)
+    $message=htmlspecialchars($row['msg'], ENT_QUOTES);
     $message=str_replace('  ', '&nbsp;&nbsp;', nl2br($message));
-    $msgReply=htmlspecialchars($row['回覆'], ENT_QUOTES);
+    $msgReply=htmlspecialchars($row['reply'], ENT_QUOTES);
     $mesReply=str_replace('  ', '&nbsp;&nbsp;', nl2br($msgReply));
-    $msgPrivate=($row['留言設定']);
     
+    //取得留言公開權限範圍
+    $msgPrivate=($row['private']);
 
     //若管理員已將留言設定為隱藏，則隱藏內容
     //若管言者已將留言設定為不公開，則不公開
@@ -149,11 +149,8 @@ if ($numRows>0) {
       $message='留言者設定隱藏不顯示';
       $msgTitle='留言者設定隱藏不顯示';
     }
-    
-    
-    
-    /*輸出留言者名稱、留言日期時間、標題與留言內容
-      以div包住表格邊框並設定顏色*/
+
+    //輸出留言者名稱、留言日期時間、標題與留言內容
     echo " 
     <li style='margin-left:-20px'>
         <div style='border:5px #000 double;border-color:#2894FF;margin-right:20px'>
@@ -164,7 +161,7 @@ if ($numRows>0) {
                 </tr>
                 <tr>
                     <td class='tdclass'>留言時間：</td>
-                    <td class='txtBoard'>{$row['日期時間']}</td>
+                    <td class='txtBoard'>{$row['datetime']}</td>
                 </tr>
                 <tr>
                     <td class='tdclass'>標題：</td>
@@ -189,6 +186,7 @@ if ($numRows>0) {
   echo '</ol>';
 }
 ?>
+<!-- 留言板php碼結束 -->
                     </form>
                   </font>
                 </div>
@@ -207,4 +205,12 @@ if ($numRows>0) {
   </div>
 </body>
 
+  <!-- core js -->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- 驗證碼產生器js -->
+  <script src="js/code.js"></script>
+  <!-- 彈跳視窗js -->
+  <script src="js/toggle.js"></script>
+  
 </html>
