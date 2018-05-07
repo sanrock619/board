@@ -8,8 +8,8 @@ $msgNum =$_POST['msgNum'];        // 存放欲修改留言編號的變數
 $msgReply =$_POST['msgReply'];    // 存放管理員回覆的變數
 $msgPrivate =$_POST['msgPrivate'];// 存放留言是否公開的變數
 
+//登入密碼
 if ( $password=='123456' ){
-    
     if(!empty($_POST['msgNum']) && !empty($_POST['msgPrivate'] )){
         $sql= "UPDATE msgBoard SET private='$msgPrivate' WHERE msg_id='$msgNum'";
         mysqli_query($conn, $sql);

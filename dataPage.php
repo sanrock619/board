@@ -29,10 +29,8 @@ if ($errMsg ==''){
     $sql="INSERT INTO msgBoard (name, title, msg, datetime, private ) VALUES ('$name', '$msgTitle' , '$message', '$now' , '$msgPrivate')";
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('已成功新增一筆留言，感謝您的留言！'); location.href = 'index.php';</script>";
-        // echo '<p align="center"> <font color=black size="3"><span class="glyphicon glyphicon-ok"></span>已成功新增一筆留言，感謝您的留言！</font></p><br>';
     }else {
         echo "<script>alert('$errMsg'); location.href = 'index.php';</script>";
-        // echo '<p align="center"> <font color=#696969 size="3"><span class="glyphicon glyphicon-remove"></span>"$errMsg"</font></p><br>';
     }
 }
 ?>

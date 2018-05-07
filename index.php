@@ -8,7 +8,7 @@ $myTable = 'msgBoard';
 /*
  * 執行SQL查詢 語法:$result = mysqli_query($link, $sql);
  * $link=MSQL連線設定變數名稱;$sql="SQL陳述式"
- * 查詢資料表所有欄位,將所得到的之查詢結果存入result資料表變數
+ * 查詢資料表所有欄位,將所得到的查詢結果存入result變數
  * 依資料表裡的留言編號遞減排序, 讓最新留言顯示在最前面
  */
 $result = mysqli_query($conn, "SELECT * FROM $myTable ORDER BY msg_id DESC");
@@ -23,117 +23,121 @@ $numRows = mysqli_num_rows($result);
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>留言板</title>
+
+<!-- core css -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- 專案套版css -->
+<!-- template css -->
 <link href="css/cover.css" rel="stylesheet">
-<!-- 專案客製css -->
+<!-- project css -->
 <link href="css/board.css" rel="stylesheet">
 
 </head>
 
 <body background="img/starfield-background.png" onload="createCode()">
-	<div id="snowspawner">
-		<div
-			style="background-image: url('img/starfield-background.png'); background-repeat: repeat">
-			<div class="site-wrapper">
-				<div class="site-wrapper-inner">
-					<div class="cover-container">
-						<div class="masthead clearfix">
-							<div class="inner">
-								<h3 class="masthead-brand">留言板</h3>
-								<nav>
-									<ul class="nav masthead-nav">
-										<li class="active" id="top"><a href="index.php"><span
-												class="glyphicon glyphicon-home">首頁</a></li>
-										<li><a href="mailto:sanrock619@gmail.com"><span
-												class="glyphicon glyphicon-envelope">連絡管理員</a></li>
-										<li><a href="signin.html" target="_blank"><span
-												class="glyphicon glyphicon-wrench">管理後台</a></li>
-									</ul>
-								</nav>
-							</div>
+	<div
+		style="background-image: url('img/starfield-background.png'); background-repeat: repeat">
+		<div class="site-wrapper">
+			<div class="site-wrapper-inner">
+				<div class="cover-container">
+					<div class="masthead clearfix">
+						<div class="inner">
+							<h3 class="masthead-brand">留言板</h3>
+							<nav>
+								<ul class="nav masthead-nav">
+									<li class="active" id="top"><a href="index.php"> <span
+											class="glyphicon glyphicon-home">首頁</span>
+									</a></li>
+									<li><a href="mailto:sanrock619@gmail.com"> <span
+											class="glyphicon glyphicon-envelope">連絡管理員</span>
+									</a></li>
+									<li><a href="signin.html" target="_blank"> <span
+											class="glyphicon glyphicon-wrench">管理後台</span>
+									</a></li>
+								</ul>
+							</nav>
 						</div>
-						<div class="inner cover">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<font size='3'><strong>留言板</strong></font>
-								</div>
-								<div class="panel-body">
-									<button type="button" class="btn btn-info" id="flip">顯示留言表單</button>
-									<br>
-									<br>
-									<div id="panel">
-										<p>
-											<font color='red'><span
-												class="glyphicon glyphicon-exclamation-sign"></font> <font
-												color='black'>若留言內容出現謾罵攻擊等字眼，經發現將予以刪除</font>
-										</p>
-										<div
-											style='border: 5px #000 double; border-color: #2894FF; margin-bottom: 0px'>
-											<form method="post" action="dataPage.php" name="addmessage">
-												<table class="table table-bordered"
-													style='margin-bottom: -15px'>
-													<tr>
-														<td class="tdIndex"><span class="glyphicon glyphicon-user"></span>名稱：</td>
-														<td class="txtIndex"><input class="input" name="name"
-															maxlength="20" required></td>
-													</tr>
-													<tr>
-														<td class="tdIndex"><span class="glyphicon glyphicon-tag"></span>標題：</td>
-														<td class="txtIndex"><input class="input" name="msgTitle"
-															maxlength="20" required></td>
-													</tr>
-													<tr>
-														<td
-															style="vertical-align: middle; background-color: #84C1FF; color: white; text-align: right">
-															<span class="glyphicon glyphicon-lock"></span><b>留言設定：</b>
-														</td>
-														<td class="txtIndex"><input type="radio" name="msgPrivate"
-															value="public" id="public" required> <label for="public"><font
-																color="blue"><span class="glyphicon glyphicon-ok-circle">留言公開</font></label>
-															<input type="radio" name="msgPrivate" value="private"
-															id="private"> <label for="private"><font color="red"><span
-																	class="glyphicon glyphicon-ban-circle">留言不公開</font></label>
-														</td>
-													</tr>
-													<tr>
-														<td
-															style="vertical-align: middle; background-color: #84C1FF; color: white; text-align: right">
-															<span class="glyphicon glyphicon-pencil"></span><b>留言內容：</b>
-														</td>
-														<td class="txtarIndex"><textarea name="message"
-																class="textArea" maxlength="150" placeholder="請輸入在150字內"
-																required></textarea></td>
-													</tr>
-												</table>
-										
-										</div>
-										<br>
-										<div style="text-align: right">
-											<input name="submit" class="btn btn-success btn-md"
-												type="submit" value="留言送出" id="submit"> &nbsp; &nbsp; <input
-												name="reset." class="btn btn-warning btn-md" type="reset"
-												value="清除資料">
-										</div>
-										</form>
-										<div style="text-align: left">
-											<form id="form1" onsubmit="validateCode()">
-												<div style="color: black">
-													<div class="code" id="checkCode" onclick="createCode()"></div>
-													<a href="#" onclick="createCode()"> <font color='#0066CC'><span
-															class="glyphicon glyphicon-refresh">重整驗證碼</a></font>
-													<p></p>
-													<div>
-														<input type="text" id="inputCode" maxlength="4"
-															placeholder="請輸入驗證碼" />&nbsp; &nbsp; <input id="Button1"
-															onclick="validateCode();" class="btn btn-primary btn-md"
-															type="button" value="確定" />
-													</div>
-												</div>
-											</form>
-										</div>
+					</div>
+					<div class="inner cover">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<font size='3'><strong>留言板</strong></font>
+							</div>
+							<div class="panel-body">
+								<button type="button" class="btn btn-info" id="flip">顯示留言表單</button>
+								<br> <br>
+								<div id="panel">
+									<p>
+										<font color='red'> <span
+											class="glyphicon glyphicon-exclamation-sign"></span>
+										</font> <font color='black'>若留言內容出現謾罵攻擊等字眼，經發現將予以刪除</font>
+									</p>
+									<div
+										style='border: 5px #000 double; border-color: #2894FF; margin-bottom: 0px'>
+										<form method="post" action="dataPage.php" name="addmessage">
+											<table class="table table-bordered"
+												style='margin-bottom: -15px'>
+												<tr>
+													<td class="tdIndex"><span class="glyphicon glyphicon-user"></span>名稱：
+													</td>
+													<td class="txtIndex"><input class="input" name="name"
+														maxlength="20" required></td>
+												</tr>
+												<tr>
+													<td class="tdIndex"><span class="glyphicon glyphicon-tag"></span>標題：</td>
+													<td class="txtIndex"><input class="input" name="msgTitle"
+														maxlength="20" required></td>
+												</tr>
+												<tr>
+													<td
+														style="vertical-align: middle; background-color: #84C1FF; color: white; text-align: right">
+														<span class="glyphicon glyphicon-lock"></span><b>留言設定：</b>
+													</td>
+													<td class="txtIndex"><input type="radio" name="msgPrivate"
+														value="public" id="public" required> <label for="public"><font
+															color="blue"><span class="glyphicon glyphicon-ok-circle"></span>留言公開</font></label>
+														<input type="radio" name="msgPrivate" value="private"
+														id="private"> <label for="private"><font color="red"><span
+																class="glyphicon glyphicon-ban-circle"></span>留言不公開</font></label>
+													</td>
+												</tr>
+												<tr>
+													<td
+														style="vertical-align: middle; background-color: #84C1FF; color: white; text-align: right">
+														<span class="glyphicon glyphicon-pencil"></span><b>留言內容：</b>
+													</td>
+													<td class="txtarIndex"><textarea name="message"
+															class="textArea" maxlength="150" placeholder="請輸入在150字內"
+															required></textarea></td>
+												</tr>
+											</table>
+									
 									</div>
-									<br> <font size='3' color='black'> <!-- 留言板php碼開始 -->
+									<br>
+									<div style="text-align: right">
+										<input name="submit" class="btn btn-success btn-md"
+											type="submit" value="留言送出" id="submit"> &nbsp; &nbsp; <input
+											name="reset." class="btn btn-warning btn-md" type="reset"
+											value="清除資料">
+									</div>
+									</form>
+									<div style="text-align: left">
+										<form id="form1" onsubmit="validateCode()">
+											<div style="color: black">
+												<div class="code" id="checkCode" onclick="createCode()"></div>
+												<a href="#" onclick="createCode()"> <font color='#0066CC'><span
+														class="glyphicon glyphicon-refresh"></span>重整驗證碼</font></a>
+												<p></p>
+												<div>
+													<input type="text" id="inputCode" maxlength="4"
+														placeholder="請輸入驗證碼" />&nbsp; &nbsp; <input id="Button1"
+														onclick="validateCode();" class="btn btn-primary btn-md"
+														type="button" value="確定" />
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<br> <font size='3' color='black'> <!-- 留言板php碼開始 -->
 <?php echo "<font color='black'><p align=left>共有 $numRows 筆留言</p></font>"?>
                   <form>
 <?php
@@ -145,9 +149,7 @@ if ($numRows > 0) {
     echo '<ol reversed>';
     
     /*
-     * 以下使用mysqli_fetch_array()函數,語法:mysqli_fetch_array(result,resulttype)
-     * 參數result:即mysqli_query()方法所查詢之結果(必要)
-     * 參數resulttype:指定產生類型的陣列(非必要) MYSQLI_ASSOC ; MYSQLI_NUM ; MYSQLI_BOTH 三選一
+     * 使用mysqli_fetch_array()函數,mysqli_fetch_array(result)
      */
     while ($row = mysqli_fetch_array($result)) {
         
@@ -214,23 +216,21 @@ if ($numRows > 0) {
 }
 ?>
 <!-- 留言板php碼結束 -->
-										</form>
-									</font>
-								</div>
-								<div class="panel-footer" style="background: #005AB5">
-									<a href="#top"><span class="glyphicon glyphicon-share-alt"><font
-											size='3'>回到最上頁</a></font>
-								</div>
+									</form>
+								</font>
+							</div>
+							<div class="panel-footer" style="background: #005AB5">
+								<a href="#top"><span class="glyphicon glyphicon-share-alt"><font
+										size='3'>回到最上頁</font></span></a>
 							</div>
 						</div>
-						<div class="mastfoot">
-							<div class="inner">
-								<p>
-									<font color='white'>留言板管理員 <a
-										href="mailto:sanrock619@gmail.com">Admin</a>.
-									</font>
-								</p>
-							</div>
+					</div>
+					<div class="mastfoot">
+						<div class="inner">
+							<p>
+								<font color='white'>留言板管理員 <a href="mailto:sanrock619@gmail.com">Admin</a>.
+								</font>
+							</p>
 						</div>
 					</div>
 				</div>

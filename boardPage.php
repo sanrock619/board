@@ -8,7 +8,7 @@ $myTable = 'msgBoard';
 /*
  * 執行SQL查詢 語法:$result = mysqli_query($link, $sql);
  * $link=MSQL連線設定變數名稱;$sql="SQL陳述式"
- * 查詢資料表所有欄位,將所得到的之查詢結果存入result資料表變數
+ * 查詢資料表所有欄位,將所得到的查詢結果存入result變數
  * 依資料表裡的留言編號遞減排序, 讓最新留言顯示在最前面
  */
 $result = mysqli_query($conn, "SELECT * FROM $myTable ORDER BY msg_id DESC");
@@ -124,9 +124,7 @@ if ($numRows > 0) {
     echo '<ol reversed>';
     
     /*
-     * 以下使用mysqli_fetch_array()函數,語法:mysqli_fetch_array(result,resulttype)
-     * 參數result:即mysqli_query()方法所查詢之結果(必要)
-     * 參數resulttype:指定產生類型的陣列(非必要) MYSQLI_ASSOC ; MYSQLI_NUM ; MYSQLI_BOTH 三選一
+     * 使用mysqli_fetch_array()函數,mysqli_fetch_array(result)
      */
     while ($row = mysqli_fetch_array($result)) {
         
